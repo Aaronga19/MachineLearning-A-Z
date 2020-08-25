@@ -1,0 +1,52 @@
+---
+title: "Preprocess"
+author: "Aaron J."
+date: "27/7/2020"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## Tratamiento de los NaN
+
+```{r}
+dataset = read.csv("Data.csv")
+#dataset = dataset[,2:3]
+dataset$Age = ifelse(is.na(dataset$Age),
+                     ave(dataset$Age, FUN = function(x)mean(x,na.rm = T)),dataset$Age)
+dataset$Salary = ifelse(is.na(dataset$Salary),
+                     ave(dataset$Salary, FUN = function(x)mean(x,na.rm = T)),dataset$Salary)
+```
+
+# codificar variables categoricas
+
+```{r}
+dataset$Country = factor(dataset$Country,
+                         levels = c("France", "Spain", "Germany"),
+                         labels = c(1,2,3))
+dataset$Purchased = factor(dataset$Purchased,
+                           levels = c("No","Yes"),
+                           labels = c(0,1))
+```
+
+# Dividir los datos en conjunto de entrenamiento y conjunto de test
+
+```{r}
+library(caTools)
+set.seed(123)
+split = sample.split(dataset$Purchased, SplitRatio = 0.8)
+split
+trainingSet = subset(dataset, split == T)
+testingSet = subset(dataset, split == F)
+```
+
+# Escalado de valores 
+
+```{r}
+trainingSet[,2:3] = scale(trainingSet[,2:3])
+testingSet[,2:3] = scale(testingSet[,2:3])
+```
+
+
