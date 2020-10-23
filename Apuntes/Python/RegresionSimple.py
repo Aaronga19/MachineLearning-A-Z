@@ -35,3 +35,20 @@ regression.fit(X_train, y_train)
 
 # Predecir el conjunto de test
 y_pred = regression.predict(X_test)
+
+# Visualizar los resultados de entrenamiento 
+plt.scatter(X_train, y_train, color = "red")
+plt.scatter(X_test, y_test, color = "pink")
+plt.plot(X_train, regression.predict(X_train), color= "blue")
+plt.title("Sueldo vs Años de Experiencia(Conjunto de entrenamiento)")
+plt.xlabel("Años de experiencia")
+plt.ylabel("Salario USD") 
+plt.show()
+
+plt.scatter(X_train, y_train, color = "red", label = True)
+plt.scatter(X_test, y_test, color = "pink")
+plt.plot(X_train, regression.predict(X_train), color= "blue")
+plt.title("Sueldo vs Años de Experiencia(Conjunto de entrenamiento)")
+plt.xlabel("Años de experiencia")
+plt.ylabel("Salario USD") 
+plt.show()
