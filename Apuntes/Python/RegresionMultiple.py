@@ -48,7 +48,7 @@ y_pred = regression.predict(X_test)
 # ELIMINACION HACIA ATRAS
 import statsmodels.api as sm
 # Para poder calcular el P-Valor
-"""
+
 X = np.append(arr = np.ones((50,1)).astype(int), values = X , axis = 1)
 SL= 0.05
 
@@ -69,7 +69,7 @@ regression_OLS.summary()
 X_opt = X[:, [0,3]].tolist()
 regression_OLS = sm.OLS(endog = y, exog= X_opt).fit()
 regression_OLS.summary()
-"""
+
 """
 import statsmodels.api as sm
 def backwardElimination(x, sl):    
@@ -112,7 +112,7 @@ def backwardElimination(x, SL):
                     else:                        
                         continue    
     regressor_OLS.summary()    
-    return x 
+    return x
  
 SL = 0.05
 X_opt = X[:, [0, 1, 2, 3, 4, 5]]
