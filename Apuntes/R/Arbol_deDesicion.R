@@ -1,5 +1,5 @@
+# Arbol de desición
 
-# Platilla de Regresión
 
 # Se carga el conjunto de datos
 
@@ -7,7 +7,6 @@ dataset = read.csv("C:/Users/Aaronga/Documents/GitHub/MachineLearningAZ/datasets
 # Filtrado de columnas si es necesario
 
 dataset = dataset[, 2:3]
-
 
 
 # codificar variables categoricas
@@ -37,11 +36,10 @@ trainingSet[,2:3] = scale(trainingSet[,2:3])
 testingSet[,2:3] = scale(testingSet[,2:3])
 """
 
-# Ajustar modelo de Regresión
+# Ajustar modelo de Regresión de Arbol de desición
 
-#Crear el modelo de regresión aqui regression = ... 
-
-
+library(rpart)
+regression = rpart(formula = Salary ~ .,data = dataset, control = rpart.control(minsplit = 1))
 
 # Prediccion de nuevos resultados con Regresion
 y_pred = (predict(regression, newdata = data.frame(Level = 6.5)))

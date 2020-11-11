@@ -1,14 +1,9 @@
-
-# Platilla de Regresión
+# Regresión de Bosques Aleatorios
 
 # Se carga el conjunto de datos
 
 dataset = read.csv("C:/Users/Aaronga/Documents/GitHub/MachineLearningAZ/datasets/Part 2 - Regression/Section 6 - Polynomial Regression/Position_Salaries.csv")
-# Filtrado de columnas si es necesario
-
-dataset = dataset[, 2:3]
-
-
+dataset = dataset[, 2:3] # Filtrado de columnas si es necesario
 
 # codificar variables categoricas
 
@@ -37,23 +32,27 @@ trainingSet[,2:3] = scale(trainingSet[,2:3])
 testingSet[,2:3] = scale(testingSet[,2:3])
 """
 
-# Ajustar modelo de Regresión
+# Ajustar modelo de Regresión Random Forest
+install.packages("randomForest")
+library(randomForest)
+set.seed(1234)
+regression = randomForest(x = dataset[1], 
+                          y = dataset$Salary, 
+                          ntree = 300) 
 
-#Crear el modelo de regresión aqui regression = ... 
 
 
-
-# Prediccion de nuevos resultados con Regresion
+# Prediccion de nuevos resultados con Regresion Random Forest
 y_pred = (predict(regression, newdata = data.frame(Level = 6.5)))
 
-# Visualizacion del modelo de Regresión
+# Visualizacion del modelo de Regresión Random Forest
 library(ggplot2)
-x_grid =  seq(min(dataset$Level), max(dataset$Level),0.1)
+x_grid =  seq(min(dataset$Level), max(dataset$Level),0.01)
 ggplot() + 
         geom_point(aes(x = dataset$Level, 
                        y = dataset$Salary), colour =  "red") +
         geom_line(aes(x=x_grid, 
                       y = predict(regression, newdata = data.frame(Level = x_grid))), colour = "blue") +
-        ggtitle("Modelo de Regresión de Arbol de Desicion") +
+        ggtitle("Modelo de Regresión de Bosque de desición") +
         xlab("Nivel del empleado")+
         ylab("Sueldo en USD")
