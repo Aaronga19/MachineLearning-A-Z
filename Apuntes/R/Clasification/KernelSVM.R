@@ -3,8 +3,8 @@
 
 
 
-#                                                       SVM
 
+#                                               Kernel SVM
 
 # Se carga el conjunto de datos
 
@@ -47,7 +47,8 @@ library(e1071)
 classifier = svm(formula = Purchased ~ ., 
                  data = trainingSet,
                  type = "C-classification",
-                 kernel = "linear")
+                 kernel = "radial",
+                 gamma = 9)
 
 
 # Prediccion de nuevos resultados con el conjunto de Testing
@@ -58,7 +59,7 @@ y_pred = predict(classifier, newdata = testingSet[,-3])
 cm = table(testingSet[,3], y_pred)
 
 # Visualizacion del conjunto de entrenamiento
-install.packages("ElemStatLearn")
+#install.packages("ElemStatLearn")
 library(ElemStatLearn)
 set = trainingSet
 X1 = seq(min(set[, 1]) - 1, max(set[, 1]) + 1, by = 0.01)
@@ -67,7 +68,7 @@ grid_set = expand.grid(X1, X2)
 colnames(grid_set) = c('Age', 'EstimatedSalary')
 y_grid = predict(classifier, newdata = grid_set)
 plot(set[, -3],
-     main = 'SVM (Conjunto de Entrenamiento)',
+     main = 'Kernel SVM (Conjunto de Entrenamiento)',
      xlab = 'Edad', ylab = 'Sueldo Estimado',
      xlim = range(X1), ylim = range(X2))
 contour(X1, X2, matrix(as.numeric(y_grid), length(X1), length(X2)), add = TRUE)
@@ -83,7 +84,7 @@ grid_set = expand.grid(X1, X2)
 colnames(grid_set) = c('Age', 'EstimatedSalary')
 y_grid = predict(classifier, newdata = grid_set)
 plot(set[, -3],
-     main = 'SVM (Conjunto de Testing)',
+     main = 'Kernel SVM (Conjunto de Testing)',
      xlab = 'Edad', ylab = 'Sueldo Estimado',
      xlim = range(X1), ylim = range(X2))
 contour(X1, X2, matrix(as.numeric(y_grid), length(X1), length(X2)), add = TRUE)

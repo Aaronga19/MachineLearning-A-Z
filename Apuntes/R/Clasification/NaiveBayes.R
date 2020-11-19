@@ -1,10 +1,7 @@
 
 
 
-
-
-#                                                       SVM
-
+#                                         Naive Bayes
 
 # Se carga el conjunto de datos
 
@@ -12,11 +9,16 @@ dataset = read.csv("GitHub/MachineLearningAZ/datasets/Part 3 - Classification/Se
 # Filtrado de columnas si es necesario
 dataset = dataset[, 3:5]
 
+# Colocar la variable de clasificacion como factor ya que Bayes lo pide en la librería 
+
+dataset$Purchased = factor(dataset$Purchased,
+                              levels = c(0,1)) 
+
 
 
 # codificar variables categoricas
 
-"""
+""" 
 dataset$Country = factor(dataset$Country,
                          levels = c('France', 'Spain', 'Germany'),
                          labels = c(1,2,3))
@@ -41,24 +43,24 @@ trainingSet[,1:2] = scale(trainingSet[,1:2])
 testingSet[,1:2] = scale(testingSet[,1:2])
 
 
-# Ajustar modelo de SVM con el conjunto de entrenamiento 
+# Ajustar modelo de Naive Bayes con el conjunto de entrenamiento 
 library(e1071)
 
-classifier = svm(formula = Purchased ~ ., 
-                 data = trainingSet,
-                 type = "C-classification",
-                 kernel = "linear")
+classifier = naiveBayes(x = trainingSet[,-3],
+                        y = trainingSet$Purchased)
 
 
 # Prediccion de nuevos resultados con el conjunto de Testing
+
 y_pred = predict(classifier, newdata = testingSet[,-3])
+
 
 # Crear matriz de Confusión 
 
 cm = table(testingSet[,3], y_pred)
 
 # Visualizacion del conjunto de entrenamiento
-install.packages("ElemStatLearn")
+#install.packages("ElemStatLearn")
 library(ElemStatLearn)
 set = trainingSet
 X1 = seq(min(set[, 1]) - 1, max(set[, 1]) + 1, by = 0.01)
@@ -67,7 +69,7 @@ grid_set = expand.grid(X1, X2)
 colnames(grid_set) = c('Age', 'EstimatedSalary')
 y_grid = predict(classifier, newdata = grid_set)
 plot(set[, -3],
-     main = 'SVM (Conjunto de Entrenamiento)',
+     main = 'Naive Bayes (Conjunto de Entrenamiento)',
      xlab = 'Edad', ylab = 'Sueldo Estimado',
      xlim = range(X1), ylim = range(X2))
 contour(X1, X2, matrix(as.numeric(y_grid), length(X1), length(X2)), add = TRUE)
@@ -83,7 +85,7 @@ grid_set = expand.grid(X1, X2)
 colnames(grid_set) = c('Age', 'EstimatedSalary')
 y_grid = predict(classifier, newdata = grid_set)
 plot(set[, -3],
-     main = 'SVM (Conjunto de Testing)',
+     main = 'Naive Bayes (Conjunto de Testing)',
      xlab = 'Edad', ylab = 'Sueldo Estimado',
      xlim = range(X1), ylim = range(X2))
 contour(X1, X2, matrix(as.numeric(y_grid), length(X1), length(X2)), add = TRUE)

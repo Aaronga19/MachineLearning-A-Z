@@ -5,7 +5,7 @@ Created on Thu Nov 12 11:30:03 2020
 @author: Aaronga
 """
 
-# Regresión Logistica
+"""                                     Regresión Logistica                                        """
 
 import numpy as np
 import matplotlib.pyplot as plt

@@ -1,11 +1,11 @@
 # -*- coding: utf-8 -*-
 """
-Created on Thu Nov 12 14:22:30 2020
+Created on Thu Nov 19 14:54:13 2020
 
 @author: Aaronga
 """
 
-"""                                     Plantilla de Clasificación                                 """ 
+"""                                      Naive Bayes                                            """
 
 # Se importa el Dataset__
 
@@ -32,10 +32,10 @@ sc_X = StandardScaler()
 XTrain = sc_X.fit_transform(XTrain)
 XTest = sc_X.transform(XTest)
 
-
 # Ajustar el clasificador
-
-"""Crear el modelo de clasificación aqui"""
+from sklearn.naive_bayes import GaussianNB
+classifier = GaussianNB()
+classifier.fit(XTrain,YTrain)
 
 # Predicción del Clasificador 
 
@@ -60,7 +60,7 @@ plt.ylim(X2.min(), X2.max())
 for i,j in enumerate (np.unique(y_set)):
     plt.scatter(X_set[y_set== j,0], X_set[y_set==j,1],
                 c = ListedColormap(('red','green'))(i),label = j)
-plt.title("Clasiffier (Training set)")
+plt.title("Naive Bayes (Training set)")
 plt.xlabel("Age")
 plt.ylabel("Estimated Salary")
 plt.legend()
@@ -78,7 +78,7 @@ plt.ylim(X2.min(), X2.max())
 for i,j in enumerate (np.unique(y_set)):
     plt.scatter(X_set[y_set== j,0], X_set[y_set==j,1],
                 c = ListedColormap(('red','green'))(i),label = j)
-plt.title("Clasiffier (Testing set)")
+plt.title("Naive Bayes (Testing set)")
 plt.xlabel("Age")
 plt.ylabel("Estimated Salary")
 plt.legend()

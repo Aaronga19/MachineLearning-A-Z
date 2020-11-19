@@ -4,7 +4,7 @@ Created on Tue Oct 27 20:54:43 2020
 
 @author: Aaronga
 """
-
+"""                                      Regression Template                                     """
 #Importación de librerias
 import numpy as np
 import matplotlib.pyplot as plt
