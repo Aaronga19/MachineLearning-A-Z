@@ -31,7 +31,6 @@ dataset$Purchased = factor(dataset$Purchased,
 library(caTools)
 set.seed(123)
 split = sample.split(dataset$Purchased, SplitRatio = 0.75)
-split
 trainingSet = subset(dataset, split == T)
 testingSet = subset(dataset, split == F)
 

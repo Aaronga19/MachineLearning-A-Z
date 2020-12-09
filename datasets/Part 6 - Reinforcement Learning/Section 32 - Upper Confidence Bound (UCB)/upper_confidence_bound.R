@@ -1,4 +1,4 @@
-# Upper Confidence Bound
+#                         Upper Confidence Bound
 
 # Importar los datos
 dataset = read.csv("Ads_CTR_Optimisation.csv")
