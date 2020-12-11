@@ -20,7 +20,7 @@ dataset = pd.read_csv("C:/Users/Aaronga/Documents/GitHub/MachineLearningAZ/datas
 X = dataset.iloc[:,[2,3]].values # Para convertirlo a vector se usa [:,1:2]
 y = dataset.iloc[:, 4].values
 
-# Dicidir el data set en conjunto de entrenamiento y conjunto de testing
+# Dividir el data set en conjunto de entrenamiento y conjunto de testing
                        
 from sklearn.model_selection import train_test_split
 XTrain, XTest, YTrain, YTest = train_test_split(X, y, test_size = 0.25, random_state = 0)
@@ -49,6 +49,8 @@ from sklearn.metrics import confusion_matrix
 
 cm = confusion_matrix(YTest, y_pred) # Así podemos tener una breve descripcion de como es el modelo, en donde acertó y cuantas veces se equivocó 
 
+accuracy = (cm[0][0]+cm[1][1])/sum(sum(cm))
+print(f"The accuracy is: {accuracy:>2.3f} = {accuracy*100:>2.1f}%")
 # Visualizacion de los datos del Clasificador
 
 from matplotlib.colors import ListedColormap

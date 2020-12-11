@@ -32,10 +32,13 @@ XTrain = sc_X.fit_transform(XTrain)
 XTest = sc_X.transform(XTest)
 """
 
-# Ajustar regresion CORRESPONDIENTE
-
+# Ajustar regresion Arbol de Desición
 from sklearn.tree import DecisionTreeRegressor
-regression = DecisionTreeRegressor(random_state = 0)
+regression = DecisionTreeRegressor(random_state = 0,criterion='mse', max_depth=4, max_features=None,
+           max_leaf_nodes=20, min_impurity_decrease=0.0,
+           min_impurity_split=None, min_samples_leaf=1,
+           min_samples_split=2, min_weight_fraction_leaf=0.0,
+           presort=False, random_state=None, splitter='best')
 help(DecisionTreeRegressor())
 regression.fit(X,y)
 # Predicción correspondiente

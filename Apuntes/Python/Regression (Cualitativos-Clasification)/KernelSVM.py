@@ -46,6 +46,8 @@ from sklearn.metrics import confusion_matrix
 
 cm = confusion_matrix(YTest, y_pred) # Así podemos tener una breve descripcion de como es el modelo, en donde acertó y cuantas veces se equivocó 
 
+accuracy = (cm[0][0]+cm[1][1])/sum(sum(cm))
+print(f"The accuracy is: {accuracy:>2.3f} = {accuracy*100:>2.1f}%")
 """cmTrain = confusion_matrix(YTrain, y_pred)""" 
 
 # Visualizacion de los datos del modelo Kernel SVM Training
