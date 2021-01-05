@@ -13,6 +13,7 @@ dataset = pd.read_csv("Data.csv")
 X = dataset.iloc[:, :-1].values
 y = dataset.iloc[:, 3].values
 
+#           Codificar datos categóricos
 from sklearn.preprocessing import LabelEncoder, OneHotEncoder
 labelEncoderX = LabelEncoder()
 X[:,0]=labelEncoderX.fit_transform(X[:,0])
