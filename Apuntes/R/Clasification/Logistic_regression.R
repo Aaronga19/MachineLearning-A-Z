@@ -1,7 +1,7 @@
 
 
 
-#                                               Regresión Logística
+#                                       Regresión Logística
 
 # Se carga el conjunto de datos
 
